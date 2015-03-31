@@ -1,2 +1,3 @@
 examples/out/
 examples/data/faces/
+*.gem
