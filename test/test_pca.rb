@@ -28,9 +28,45 @@ class TestPCA < MiniTest::Test
     end
   end
 
+  def test_fit_transform_with_scale_data
+    d = get_data
+    pca = PCA.new components: 1, scale_data: true
+    transformed = pca.fit_transform d
+
+    expected = [
+      -1.03068,
+      2.19045,
+      -1.17819,
+      -0.32329,
+      -2.0722,
+      -1.10117,
+      0.08785,
+      1.40605,
+      0.53812,
+      1.48306
+    ]
+
+    transformed.size1.times do |i|
+      assert_in_delta expected[i], transformed[i]
+    end
+  end
+
   def test_inverse_transform
     d = get_data
     pca = PCA.new components: 1
+    transformed = pca.fit_transform d
+    inverse = pca.inverse_transform(transformed).to_a
+    
+    d.each_with_index do |row, i|
+      row.each_with_index do |val, j|
+        assert_in_delta val, inverse[i][j], 0.5 # close-ish
+      end
+    end
+  end
+
+  def test_inverse_transform_with_scale_data
+    d = get_data
+    pca = PCA.new components: 1, scale_data: true
     transformed = pca.fit_transform d
     inverse = pca.inverse_transform(transformed).to_a
     

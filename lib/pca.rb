@@ -1,10 +1,11 @@
 require 'gsl'
 
 class PCA
-  attr_reader :components, :singular_values, :mean, :explained_variance, :explained_variance_ratio
+  attr_reader :components, :singular_values, :mean, :std, :explained_variance, :explained_variance_ratio
 
   def initialize opts = {}
     @n_components = opts[:components]
+    @scale_data = opts[:scale_data]
   end
 
   def fit x
@@ -14,7 +15,7 @@ class PCA
   end
 
   def transform x
-    x = prepare_data x, use_saved_mean: true
+    x = prepare_data x, use_saved_mean_and_std: true
     _transform x
   end
 
@@ -26,7 +27,8 @@ class PCA
 
   def inverse_transform x
     x = ensure_matrix x
-    out = x * @components #.transpose
+    out = x * @components
+    out.size2.times {|col| out.col(col).mul! @std[col] } if @scale_data
     out.size2.times {|col| out.col(col).add! @mean[col] }
     out
   end
@@ -34,8 +36,12 @@ class PCA
   private
     def prepare_data x, opts = {}
       x = ensure_matrix x
-      @mean = calculate_mean(x) unless opts[:use_saved_mean]
+      @mean = calculate_mean(x) unless opts[:use_saved_mean_and_std]
       mean_normalize x
+      if @scale_data
+        @std = calculate_std(x) unless opts[:use_saved_mean_and_std]
+        scale(x)
+      end
       x
     end
 
@@ -69,6 +75,14 @@ class PCA
 
     def mean_normalize x
       x.size2.times {|col| x.col(col).sub! @mean[col] }
+    end
+
+    def calculate_std x
+      x.size2.times.map {|col| x.col(col).sd }
+    end
+
+    def scale x
+      x.size2.times {|col| x.col(col).div! @std[col] }
     end
 
     def slice_n x
