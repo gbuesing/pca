@@ -33,7 +33,6 @@ transformed.size1.times do |i|
   groups[label] << data
 end
 
-
 file = "examples/out/iris.png"
 
 Gnuplot.open do |gp|

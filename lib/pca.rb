@@ -26,7 +26,7 @@ class PCA
 
   def inverse_transform x
     x = ensure_matrix x
-    out = x * @components.transpose
+    out = x * @components #.transpose
     out.size2.times {|col| out.col(col).add! @mean[col] }
     out
   end
@@ -42,14 +42,14 @@ class PCA
     def _fit x
       covariance_matrix = (x.transpose * x) / x.size1
       u, v, s = covariance_matrix.SV_decomp
-      @components = slice_n u
+      @components = slice_n(u).transpose
       @singular_values = slice_n s
       @explained_variance = @singular_values**2 / x.size1
       @explained_variance_ratio = @explained_variance / @explained_variance.sum
     end
 
     def _transform x
-      x * @components
+      x * @components.transpose
     end
 
     def ensure_matrix x

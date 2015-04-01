@@ -55,7 +55,7 @@ ImageGrid.new(recovered.to_a.slice(0, grid_size)).to_file recovered_png
 
 # OUTPUT EIGENFACES PNG
 
-eigenfaces = pca.components.transpose
+eigenfaces = pca.components
 
 eigen_png = 'examples/out/eigenfaces.png'
 ImageGrid.new(eigenfaces.to_a.slice(0, grid_size)).to_file eigen_png
