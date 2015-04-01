@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = 'pca'
-  s.version     = '0.1.0'
-  s.date        = '2015-03-31'
-  s.summary     = "Principal Component Analysis"
-  s.description = "Principal Component Analysis"
+  s.version     = '0.2.0'
+  s.date        = '2015-04-01'
+  s.summary     = "Principal Component Analysis (PCA)"
+  s.description = "Principal Component Analysis (PCA). Uses GSL for calculations."
   s.authors     = ["Geoff Buesing"]
   s.email       = 'gbuesing@gmail.com'
   s.files       = ["lib/pca.rb"]
