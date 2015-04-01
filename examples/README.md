@@ -18,10 +18,6 @@ Same sample faces, reconstructed from top 36 PCA components:
 
 ![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/faces_recovered.png)
 
-Same sample faces, reconstructed from top 36 PCA components:
-
-![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/faces_recovered.png)
-
 36 top prinicpal components visualized:
 
 ![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/eigenfaces.png)
