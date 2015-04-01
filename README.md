@@ -2,6 +2,16 @@
 
 [Principal component analysis](http://en.wikipedia.org/wiki/Principal_component_analysis) in Ruby. Leverages [GSL](http://www.gnu.org/software/gsl/) for calculations.
 
+PCA can be used to map data to a lower dimensional space while minimizing information loss. 
+It's useful for data visualization, where you're limited to 2-D and 3-D plots.
+
+For example, here's a plot of the 4-D Iris dataset mapped to 2-D via PCA:
+
+![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/iris_small.png)
+
+PCA is also used to compress the features of a dataset before feeding it into a machine learning algorithm,
+potentially speeding up training time with a minimal loss of data detail.
+
 
 ## Install
 
@@ -41,7 +51,7 @@ reconstructed_2d = pca.inverse_transform data_1d
 # ]
 ```
 
-See [examples](examples/) for more.
+See [examples](examples/) for more. Also, peruse the [source code](lib/pca.rb) (< 100 loc.)
 
 
 ## Working with GSL::Matrix
@@ -57,6 +67,6 @@ Or if you'd prefer to work with a standard Ruby ```Array```, you can just call `
 
 ## Sources and Inspirations
 
-- [A tutorial on Principal Components Analysis](http://www.cs.otago.ac.nz/cosc453/student_tutorials/principal_components.pdf) (PDF)
+- [A tutorial on Principal Components Analysis](http://www.cs.otago.ac.nz/cosc453/student_tutorials/principal_components.pdf) (PDF) - A great introduction to PCA
 - [scikit-learn PCA](http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html)
 - [Lecture video](https://www.coursera.org/learn/machine-learning/lecture/ZYIPa/principal-component-analysis-algorithm) and [notes](https://share.coursera.org/wiki/index.php/ML:Dimensionality_Reduction) (requires Coursera login) from Andrew Ng's Machine Learning Coursera class
