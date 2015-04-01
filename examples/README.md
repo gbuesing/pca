@@ -3,16 +3,12 @@
 
 ## Iris
 
-```./examples/iris.rb```
-
 Transforms 4-d iris dataset into 2-d and outputs plot (requires GNUPlot):
 
 ![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/iris.png)
 
 
 ## Faces
-
-```./examples/faces.rb```
 
 Sample of original faces before running PCA:
 
