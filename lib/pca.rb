@@ -27,10 +27,10 @@ class PCA
 
   def inverse_transform x
     x = ensure_matrix x
-    out = x * @components
-    out.size2.times {|col| out.col(col).mul! @std[col] } if @scale_data
-    out.size2.times {|col| out.col(col).add! @mean[col] }
-    out
+    xit = x * @components
+    undo_scale(xit) if @scale_data
+    undo_mean_normalize xit
+    xit
   end
 
   private
@@ -77,12 +77,20 @@ class PCA
       x.size2.times {|col| x.col(col).sub! @mean[col] }
     end
 
+    def undo_mean_normalize x
+      x.size2.times {|col| x.col(col).add! @mean[col] }
+    end
+
     def calculate_std x
       x.size2.times.map {|col| x.col(col).sd }
     end
 
     def scale x
       x.size2.times {|col| x.col(col).div! @std[col] }
+    end
+
+    def undo_scale x
+      x.size2.times {|col| x.col(col).mul! @std[col] }
     end
 
     def slice_n x
