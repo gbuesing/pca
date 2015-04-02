@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'bundler/setup'
 require_relative '../lib/pca'
 require_relative 'utils/image_grid'
 require 'pnm'

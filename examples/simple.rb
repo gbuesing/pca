@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'bundler/setup'
 require_relative '../lib/pca'
 require 'gnuplot'
 
