@@ -1,6 +1,6 @@
 # Principal Component Analysis (PCA)
 
-[Principal component analysis](http://en.wikipedia.org/wiki/Principal_component_analysis) in Ruby. Leverages [GSL](http://www.gnu.org/software/gsl/) for calculations.
+[Principal component analysis](http://setosa.io/ev/principal-component-analysis/) in Ruby. Uses [GSL](http://www.gnu.org/software/gsl/) for calculations.
 
 PCA can be used to map data to a lower dimensional space while minimizing information loss. 
 It's useful for data visualization, where you're limited to 2-D and 3-D plots.
@@ -54,19 +54,49 @@ reconstructed_2d = pca.inverse_transform data_1d
 See [examples](examples/) for more. Also, peruse the [source code](lib/pca.rb) (< 100 loc.)
 
 
-## Working with GSL::Matrix
+### Working with Returned GSL::Matrix
 
 ```PCA#transform```, ```#fit_transform``` and ```#inverse_transform``` return instances of ```GSL::Matrix```.
 
-Most useful methods to work with these are the ```#each_row``` and ```#each_col``` iterators,
+Some useful methods to work with these are the ```#each_row``` and ```#each_col``` iterators,
 and the ```#row(i)``` and ```#col(i)``` accessors.
+
+Or if you'd prefer to work with a standard Ruby ```Array```, you can just call ```#to_a``` and get an array of row arrays.
+
 See [GSL::Matrix RDoc](http://blackwinter.github.io/rb-gsl/matrix_rdoc.html) for more.
 
-Or if you'd prefer to work with a standard Ruby ```Array```, you can just call ```#to_a``` on these.
+
+### Plotting Results With GNUPlot
+
+Requires [GNUPlot](http://www.gnuplot.info/) and [gnuplot gem](https://github.com/rdp/ruby_gnuplot/tree/master).
+
+```ruby
+require 'pca'
+require 'gnuplot'
+
+pca = PCA.new components: 2
+transformed = pca.fit_transform data
+
+Gnuplot.open do |gp|
+  Gnuplot::Plot.new(gp) do |plot|
+    plot.title "Transformed Data"
+    plot.terminal "png"
+    plot.output "out.png"
+
+    # Use #col accessor to get separate x and y arrays
+    # #col returns a GSL::Vector, so be sure to call #to_a before passing to DataSet
+    plot.data << Gnuplot::DataSet.new([transformed.col(0).to_a, transformed.col(1).to_a]) do |ds|
+      ds.title = "Points"
+    end
+  end
+end
+```
 
 
 ## Sources and Inspirations
 
-- [A tutorial on Principal Components Analysis](http://www.cs.otago.ac.nz/cosc453/student_tutorials/principal_components.pdf) (PDF) - A great introduction to PCA
+- [A tutorial on Principal Components Analysis](http://www.cs.otago.ac.nz/cosc453/student_tutorials/principal_components.pdf) (PDF) a great introduction to PCA
+- [Principal Component Analyisis Explained Visually](http://setosa.io/ev/principal-component-analysis/)
 - [scikit-learn PCA](http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html)
 - [Lecture video](https://www.coursera.org/learn/machine-learning/lecture/ZYIPa/principal-component-analysis-algorithm) and [notes](https://share.coursera.org/wiki/index.php/ML:Dimensionality_Reduction) (requires Coursera login) from Andrew Ng's Machine Learning Coursera class
+- [Implementing a Principal Component Analysis (PCA) in Python step by step](http://sebastianraschka.com/Articles/2014_pca_step_by_step.html)
