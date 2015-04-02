@@ -85,7 +85,9 @@ Gnuplot.open do |gp|
 
     # Use #col accessor to get separate x and y arrays
     # #col returns a GSL::Vector, so be sure to call #to_a before passing to DataSet
-    plot.data << Gnuplot::DataSet.new([transformed.col(0).to_a, transformed.col(1).to_a]) do |ds|
+    xy = [transformed.col(0).to_a, transformed.col(1).to_a]
+
+    plot.data << Gnuplot::DataSet.new(xy) do |ds|
       ds.title = "Points"
     end
   end
