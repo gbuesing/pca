@@ -3,9 +3,31 @@
 
 ## Iris
 
-Transforms 4-d iris dataset into 2-d and outputs plot (requires GNUPlot):
+Transforms 4-D iris dataset into 2-D and outputs plot (requires GNUPlot):
 
 ![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/iris.png)
+
+The explained variance ratio shows that most of the variance is explained by the first component:
+
+```
+explained_variance_ratio: [0.9967, 0.0033]
+```
+
+Thus, when we inverse transform the 2-D data back to 4-D, we get a very close approximation:
+
+```
+Inverse reconstruction vs orig (first 10 rows)
+[5.1, 3.5, 1.4, 0.2]  [5.1, 3.5, 1.4, 0.2]
+[4.8, 3.2, 1.5, 0.2]  [4.9, 3.0, 1.4, 0.2]
+[4.7, 3.2, 1.3, 0.2]  [4.7, 3.2, 1.3, 0.2]
+[4.6, 3.1, 1.5, 0.2]  [4.6, 3.1, 1.5, 0.2]
+[5.1, 3.5, 1.4, 0.2]  [5.0, 3.6, 1.4, 0.2]
+[5.5, 3.8, 1.7, 0.3]  [5.4, 3.9, 1.7, 0.4]
+[4.8, 3.2, 1.4, 0.2]  [4.6, 3.4, 1.4, 0.3]
+[5.0, 3.4, 1.5, 0.2]  [5.0, 3.4, 1.5, 0.2]
+[4.4, 2.9, 1.4, 0.2]  [4.4, 2.9, 1.4, 0.2]
+[4.8, 3.2, 1.5, 0.2]  [4.9, 3.1, 1.5, 0.1]
+```
 
 
 ## Faces
@@ -14,10 +36,10 @@ Sample of original faces before running PCA:
 
 ![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/faces.png)
 
-Same sample faces, reconstructed from top 36 PCA components:
+Same sample faces, after PCA transform with 36 components and then inverse transformed:
 
 ![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/faces_recovered.png)
 
-36 top prinicpal components visualized:
+Prinicpal components visualized (eigenfaces):
 
 ![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/eigenfaces.png)

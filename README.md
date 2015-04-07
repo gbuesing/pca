@@ -5,7 +5,7 @@
 PCA can be used to map data to a lower dimensional space while minimizing information loss. 
 It's useful for data visualization, where you're limited to 2-D and 3-D plots.
 
-For example, here's a plot of the 4-D Iris dataset mapped to 2-D via PCA:
+For example, here's a plot of the 4-D iris flower dataset mapped to 2-D via PCA:
 
 ![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/iris_small.png)
 
