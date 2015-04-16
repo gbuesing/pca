@@ -33,6 +33,7 @@ data_2d = [
 ]
 
 data_1d = pca.fit_transform data_2d
+
 # Transforms 2d data into 1d:
 # data_1d ~= [
 #   [-0.8], [1.8], [-1.0], [-0.3], [-1.7],
@@ -40,10 +41,12 @@ data_1d = pca.fit_transform data_2d
 # ]
 
 more_data_1d = pca.transform [ [3.1, 2.9] ]
-# Transforms new data into same 1d space:
+
+# Transforms new data into previously fitted 1d space:
 # more_data_1d ~= [ [-1.6] ]
 
 reconstructed_2d = pca.inverse_transform data_1d
+
 # Reconstructs original data (approximate, b/c data compression):
 # reconstructed_2d ~= [
 #   [2.4, 2.5], [0.6, 0.6], [2.5, 2.6], [2.0, 2.1], [2.9, 3.1]
@@ -51,12 +54,22 @@ reconstructed_2d = pca.inverse_transform data_1d
 # ]
 ```
 
-See [examples](examples/) for more. Also, peruse the [source code](lib/pca.rb) (< 100 loc.)
+See [examples](examples/) for more. Also, peruse the [source code](lib/pca.rb) (~ 100 loc.)
+
+
+### Options
+
+The following options can be passed in to ```PCA.new```:
+
+option | default | description
+------ | ------- | -----------
+:components | nil | number of components to extract. If nil, will just rotate data onto first principal component
+:scale_data | false | scales features before running PCA by dividing each feature by its standard deviation.
 
 
 ### Working with Returned GSL::Matrix
 
-```PCA#transform```, ```#fit_transform``` and ```#inverse_transform``` return instances of ```GSL::Matrix```.
+```PCA#transform```, ```#fit_transform```, ```#inverse_transform``` and ```#components``` return instances of ```GSL::Matrix```.
 
 Some useful methods to work with these are the ```#each_row``` and ```#each_col``` iterators,
 and the ```#row(i)``` and ```#col(i)``` accessors.
@@ -75,7 +88,7 @@ require 'pca'
 require 'gnuplot'
 
 pca = PCA.new components: 2
-transformed = pca.fit_transform data
+data_2d = pca.fit_transform data
 
 Gnuplot.open do |gp|
   Gnuplot::Plot.new(gp) do |plot|
@@ -85,7 +98,7 @@ Gnuplot.open do |gp|
 
     # Use #col accessor to get separate x and y arrays
     # #col returns a GSL::Vector, so be sure to call #to_a before passing to DataSet
-    xy = [transformed.col(0).to_a, transformed.col(1).to_a]
+    xy = [data_2d.col(0).to_a, data_2d.col(1).to_a]
 
     plot.data << Gnuplot::DataSet.new(xy) do |ds|
       ds.title = "Points"
