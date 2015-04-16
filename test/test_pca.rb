@@ -78,6 +78,30 @@ class TestPCA < MiniTest::Test
     end
   end
 
+  def test_restore
+    d = get_data
+    pca = PCA.new scale_data: true
+    transformed = pca.fit_transform d
+    
+    # save and restore components, mean and std
+    serialize = { components: pca.components.to_a, mean: pca.mean, std: pca.std }
+    saved = Marshal.load Marshal.dump serialize
+    
+    pca2 = PCA.new components: 1, scale_data: true
+    pca2.components = saved[:components]
+    pca2.mean       = saved[:mean]
+    pca2.std        = saved[:std]
+    transformed2 = pca2.transform d
+
+    assert_equal 2, transformed.size2 
+    assert_equal 1, transformed2.size2 
+
+    # assert first principal component from both transforms is the same:
+    d.length.times do |i|
+      assert_in_delta transformed.row(i)[0], transformed2.row(i)[0]
+    end
+  end
+
 private
   def get_data
     [

@@ -1,7 +1,8 @@
 require 'gsl'
 
 class PCA
-  attr_reader :components, :singular_values, :mean, :std, :explained_variance, :explained_variance_ratio
+  attr_reader :components, :singular_values, :explained_variance, :explained_variance_ratio
+  attr_accessor :mean, :std
 
   def initialize opts = {}
     @n_components = opts[:components]
@@ -31,6 +32,11 @@ class PCA
     undo_scale(xit) if @scale_data
     undo_mean_normalize xit
     xit
+  end
+
+  def components= c
+    c = ensure_matrix(c)
+    @components = slice_n(c.transpose).transpose
   end
 
   private
