@@ -54,10 +54,14 @@ class PCA
     def _fit x
       covariance_matrix = (x.transpose * x) / x.size1
       u, v, s = covariance_matrix.SV_decomp
-      @components = slice_n(u).transpose
+      
+      ev = s**2 / x.size1
+      evr = ev / ev.sum
+
+      @explained_variance = slice_n ev
+      @explained_variance_ratio = slice_n evr
       @singular_values = slice_n s
-      @explained_variance = @singular_values**2 / x.size1
-      @explained_variance_ratio = @explained_variance / @explained_variance.sum
+      @components = slice_n(u).transpose
     end
 
     def _transform x

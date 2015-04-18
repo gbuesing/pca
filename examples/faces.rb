@@ -41,6 +41,7 @@ transformed = pca.fit_transform images
 puts "PCA runtime: #{(Time.now - t).round(1)}s"
 
 puts "\nExplained_variance_ratio: #{pca.explained_variance_ratio.to_a.map {|v| v.round(4)}}"
+puts "Total EVR=#{pca.explained_variance_ratio.sum}"
 
 # OUTPUT RECOVERED IMAGES PNG
 

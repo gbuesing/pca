@@ -13,6 +13,7 @@ pca = PCA.new components: 2
 transformed = pca.fit_transform x_data
 
 puts "explained_variance_ratio: #{pca.explained_variance_ratio.to_a.map {|v| v.round(4)}}"
+puts "Total EVR=#{pca.explained_variance_ratio.sum}"
 
 puts "\nInverse reconstruction vs orig (first 10 rows)"
 inv = pca.inverse_transform transformed
