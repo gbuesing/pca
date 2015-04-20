@@ -32,6 +32,8 @@ Inverse reconstruction vs orig (first 10 rows)
 
 ## UK Food
 
+Reproducing "Eating in the UK" example shown in [Principal Component Analysis Explained Visually](http://setosa.io/ev/principal-component-analysis/), originally from [Mark Richardson's class notes on PCA](http://people.maths.ox.ac.uk/richardsonm/SignalProcPCA.pdf) (PDF).
+
 A dataset from 1997 of consumed grams of food by type by UK country (England, Wales, Scotland and Northern Ireland),
 run through PCA to reduce 17-D to 2-D, with country as the row and food type as the column features, produces:
 
