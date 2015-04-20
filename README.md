@@ -52,6 +52,12 @@ reconstructed_2d = pca.inverse_transform data_1d
 #   [2.4, 2.5], [0.6, 0.6], [2.5, 2.6], [2.0, 2.1], [2.9, 3.1]
 #   [2.4, 2.6], [1.7, 1.8], [1.0, 1.1], [1.5, 1.6], [1.0, 1.0]
 # ]
+
+evr = pca.explained_variance_ratio
+
+# Proportion of data variance explained by each component
+# Here, the first component explains 99.85% of the data variance:
+# evr ~= [0.99854]
 ```
 
 See [examples](examples/) for more. Also, peruse the [source code](lib/pca.rb) (~ 100 loc.)
