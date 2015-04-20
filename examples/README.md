@@ -39,7 +39,13 @@ run through PCA to reduce 17-D to 2-D, with country as the row and food type as 
 
 Northern Ireland appears to be an outlier on the first primary component, the x-axis, which explains 84% of the data variance.
 
-Plotting the values for each food type helps to reveal why Northern Ireland is an outlier:
+Plotting the variance of country data across each food type helps identify where to look in the data for an explanation:
+
+![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/food_variance.png)
+
+Fresh fruit, fresh potatoes, alcoholic drinks and soft drinks have the highest variances.
+
+Plotting the values for each food type shows how Northern Ireland differs from the other countries:
 
 ![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/food.png)
 
