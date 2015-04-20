@@ -10,7 +10,7 @@ Transforms 4-D iris dataset into 2-D and outputs plot (requires GNUPlot):
 The explained variance ratio shows that most of the variance is explained by the first component:
 
 ```
-explained_variance_ratio: [0.9967, 0.0033]
+explained_variance_ratio: [0.9963, 0.0033]
 ```
 
 Thus, when we inverse transform the 2-D data back to 4-D, we get a very close approximation:
