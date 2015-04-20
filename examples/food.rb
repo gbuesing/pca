@@ -36,5 +36,26 @@ def plot data, labels, title, file
   `open #{file}`
 end
 
-plot xt_2d, xt_labels, "UK Food by Country", 'examples/out/food_country.png'
+plot xt_2d, xt_labels, "UK Food by Country PCA", 'examples/out/food_pca.png'
 
+
+
+Gnuplot.open do |gp|
+  Gnuplot::Plot.new(gp) do |plot|
+    plot.title "UK Food"
+    plot.terminal "png"
+    plot.output 'examples/out/food.png'
+    plot.style  "data histograms"
+    plot.xtics  "nomirror rotate by -45"
+
+    x = x_labels
+    (0..3).each do |col|  
+      y = x_data.collect{|arr| arr[col]}
+      plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
+        ds.using = "2:xtic(1)"
+        ds.title = xt_labels[col]
+      end
+    end
+  end
+end
+`open examples/out/food.png`

@@ -30,6 +30,22 @@ Inverse reconstruction vs orig (first 10 rows)
 ```
 
 
+## UK Food
+
+A dataset from 1997 of consumed grams of food by type by UK country (England, Wales, Scotland and Northern Ireland),
+run through PCA to reduce 17-D to 2-D, with country as the row and food type as the column features, produces:
+
+![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/food_pca.png)
+
+Northern Ireland appears to be an outlier on the first primary component, the x-axis, which explains 84% of the data variance.
+
+Plotting the values for each food type helps to reveal why Northern Ireland is an outlier:
+
+![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/food.png)
+
+From the plot, you can see that Northern Ireland consumes far more fresh potatoes, and far less fresh fruit and alcoholic drinks.
+
+
 ## Faces
 
 Sample of original faces before running PCA:
