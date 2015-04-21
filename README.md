@@ -121,3 +121,4 @@ end
 - [scikit-learn PCA](http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html)
 - [Lecture video](https://www.coursera.org/learn/machine-learning/lecture/ZYIPa/principal-component-analysis-algorithm) and [notes](https://share.coursera.org/wiki/index.php/ML:Dimensionality_Reduction) (requires Coursera login) from Andrew Ng's Machine Learning Coursera class
 - [Implementing a Principal Component Analysis (PCA) in Python step by step](http://sebastianraschka.com/Articles/2014_pca_step_by_step.html)
+- [Dimensionality Reduction: Principal Component Analysis in-depth](http://nbviewer.ipython.org/github/jakevdp/sklearn_pycon2015/blob/master/notebooks/04.1-Dimensionality-PCA.ipynb)
