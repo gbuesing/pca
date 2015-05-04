@@ -1,6 +1,13 @@
 # PCA Examples
 
 
+## Simple (2D to 1D)
+
+![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/simple_orig.png)
+
+![iris](https://raw.githubusercontent.com/gbuesing/pca/master/examples/data/simple_pca_1d.png)
+
+
 ## Iris
 
 Transforms 4-D iris dataset into 2-D and outputs plot (requires GNUPlot):

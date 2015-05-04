@@ -17,6 +17,22 @@ d = [
   [1.1, 0.9]
 ]
 
+file = "examples/out/simple_orig.png"
+
+Gnuplot.open do |gp|
+  Gnuplot::Plot.new(gp) do |plot|
+    plot.title "Original Data"
+    plot.terminal "png"
+    plot.output file
+
+    plot.data << Gnuplot::DataSet.new([d.map(&:first), d.map(&:last)]) do |ds|
+      ds.notitle
+    end
+  end
+end
+
+`open #{file}`
+
 pca = PCA.new #components: 1
 transformed = pca.fit_transform d
 
@@ -39,15 +55,15 @@ inv = pca.inverse_transform transformed
 puts "\ninverse_transform:"
 p inv
 
-file = "examples/out/simple.png"
+file = "examples/out/simple_pca_1d.png"
 
 Gnuplot.open do |gp|
   Gnuplot::Plot.new(gp) do |plot|
-    plot.title "Simple"
+    plot.title "PCA 1D"
     plot.terminal "png"
     plot.output file
 
-    plot.data << Gnuplot::DataSet.new([transformed.col(0).to_a, transformed.col(1).to_a]) do |ds|
+    plot.data << Gnuplot::DataSet.new([transformed.col(0).to_a, Array.new(d.length, 0)]) do |ds|
       ds.notitle
     end
   end
