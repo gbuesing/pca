@@ -82,7 +82,7 @@ and the ```#row(i)``` and ```#col(i)``` accessors.
 
 Or if you'd prefer to work with a standard Ruby ```Array```, you can just call ```#to_a``` and get an array of row arrays.
 
-See [GSL::Matrix RDoc](http://blackwinter.github.io/rb-gsl/matrix_rdoc.html) for more.
+See [GSL::Matrix RDoc](http://blackwinter.github.io/rb-gsl/rdoc/matrix_rdoc.html) for more.
 
 
 ### Plotting Results With GNUPlot
