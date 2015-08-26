@@ -17,7 +17,8 @@ potentially speeding up training time with a minimal loss of data detail.
 
 **Mac OS X note**: you will need a more recent version of gcc, which can be installed via homebrew: ```brew tap homebrew/versions && brew install gcc48```
 
-    gem install pca
+    gem build pca.gemspec
+    gem install pca-0.5.0.pre.gem
 
 
 ## Example Usage
@@ -73,7 +74,7 @@ option | default | description
 :scale_data | false | scales features before running PCA by dividing each feature by its standard deviation.
 
 
-### Working with Returned MMatrix
+### Working with Returned NMatrix
 
 ```PCA#transform```, ```#fit_transform```, ```#inverse_transform``` and ```#components``` return instances of ```NMatrix```.
 
