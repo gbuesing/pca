@@ -55,7 +55,7 @@ class PCA
     end
 
     def _fit x
-      covariance_matrix = (x.transpose.dot x) / x.rows
+      # covariance_matrix = (x.transpose.dot x) / x.rows
       covariance_matrix = x.cov
       u, s, vt = covariance_matrix.gesvd
       
