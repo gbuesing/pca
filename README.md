@@ -15,7 +15,7 @@ potentially speeding up training time with a minimal loss of data detail.
 
 ## Install
 
-**GSL must be installed first**. On OS X it can be installed via homebrew: ```brew install gsl```
+**Mac OS X note**: you will need a more recent version of gcc, which can be installed via homebrew: ```brew tap homebrew/versions && brew install gcc48```
 
     gem install pca
 
@@ -73,16 +73,16 @@ option | default | description
 :scale_data | false | scales features before running PCA by dividing each feature by its standard deviation.
 
 
-### Working with Returned GSL::Matrix
+### Working with Returned MMatrix
 
-```PCA#transform```, ```#fit_transform```, ```#inverse_transform``` and ```#components``` return instances of ```GSL::Matrix```.
+```PCA#transform```, ```#fit_transform```, ```#inverse_transform``` and ```#components``` return instances of ```NMatrix```.
 
-Some useful methods to work with these are the ```#each_row``` and ```#each_col``` iterators,
+Some useful methods to work with these are the ```#each_row``` and ```#each_column``` iterators,
 and the ```#row(i)``` and ```#col(i)``` accessors.
 
 Or if you'd prefer to work with a standard Ruby ```Array```, you can just call ```#to_a``` and get an array of row arrays.
 
-See [GSL::Matrix RDoc](http://blackwinter.github.io/rb-gsl/rdoc/matrix_rdoc.html) for more.
+See [NMatrix RDoc](http://sciruby.com/nmatrix/docs/) for more.
 
 
 ### Plotting Results With GNUPlot
