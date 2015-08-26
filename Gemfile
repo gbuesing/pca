@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rb-gsl'
+# gem 'rb-gsl'
+gem 'nmatrix'
+gem 'nmatrix-lapacke'
+gem 'nmatrix-atlas'
 gem 'minitest'
 gem 'chunky_png'
 gem 'gnuplot'

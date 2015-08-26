@@ -9,7 +9,7 @@ class TestPCA < MiniTest::Test
     d = get_data
     pca = PCA.new components: 1
     transformed = pca.fit_transform d
-    assert_equal 1, transformed.size2
+    assert_equal 1, transformed.cols
 
     expected = [
       -0.827970186, 
@@ -24,7 +24,7 @@ class TestPCA < MiniTest::Test
       1.22382056
     ]
 
-    transformed.size1.times do |i|
+    transformed.rows.times do |i|
       assert_in_delta expected[i], transformed[i]
     end
   end
@@ -47,7 +47,7 @@ class TestPCA < MiniTest::Test
       1.48306
     ]
 
-    transformed.size1.times do |i|
+    transformed.rows.times do |i|
       assert_in_delta expected[i], transformed[i]
     end
   end
@@ -93,8 +93,8 @@ class TestPCA < MiniTest::Test
     pca2.std        = saved[:std]
     transformed2 = pca2.transform d
 
-    assert_equal 2, transformed.size2 
-    assert_equal 1, transformed2.size2 
+    assert_equal 2, transformed.cols
+    assert_equal 1, transformed2.cols
 
     # assert first principal component from both transforms is the same:
     d.length.times do |i|

@@ -12,7 +12,7 @@ rows = File.readlines("examples/data/food.dat").map {|l| l.chomp.split(' ') }
 x_data = rows.map {|row| row[1,4].map(&:to_f) }
 x_labels = rows.map {|row| row[0] }
 
-xt_data = GSL::Matrix[*x_data].transpose
+xt_data = N[*x_data].transpose
 xt_labels = %w{England Wales Scotland N-Ireland}
 
 pca = PCA.new components: 2
@@ -40,7 +40,7 @@ end
 plot xt_2d, xt_labels, "UK Food by Country PCA", 'examples/out/food_pca.png'
 
 
-variance = xt_data.size2.times.map {|i| xt_data.col(i).variance }
+variance = xt_data.cols.times.map {|i| xt_data.col(i).variance[0] }
   # puts "#{x_labels[i]} std: #{xt_data.col(i).sd}"
 
 Gnuplot.open do |gp|

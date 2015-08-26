@@ -3,6 +3,7 @@
 require 'bundler/setup'
 require_relative '../lib/pca'
 require 'gnuplot'
+require 'pp'
 
 d = [
   [2.5, 2.4],
@@ -37,23 +38,23 @@ pca = PCA.new #components: 1
 transformed = pca.fit_transform d
 
 puts "transformed:"
-p transformed
+pp transformed
 
 puts "\ncomponents:"
-p pca.components
+pp pca.components
 
 puts "\nsingular_values:"
-p pca.singular_values
+pp pca.singular_values
 
 puts "\nexplained_variance:"
-p pca.explained_variance
+pp pca.explained_variance
 
 puts "\nexplained_variance_ratio:"
-p pca.explained_variance_ratio
+pp pca.explained_variance_ratio
 
 inv = pca.inverse_transform transformed
 puts "\ninverse_transform:"
-p inv
+pp inv
 
 file = "examples/out/simple_pca_1d.png"
 

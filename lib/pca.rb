@@ -1,4 +1,7 @@
-require 'gsl'
+require 'nmatrix/nmatrix'
+require 'nmatrix/lapack_plugin'
+# require 'nmatrix/atlas'
+# require 'nmatrix/lapacke'
 
 class PCA
   attr_reader :components, :singular_values, :explained_variance, :explained_variance_ratio
@@ -28,7 +31,7 @@ class PCA
 
   def inverse_transform x
     x = ensure_matrix x
-    xit = x * @components
+    xit = x.dot @components
     undo_scale(xit) if @scale_data
     undo_mean_normalize xit
     xit
@@ -52,11 +55,12 @@ class PCA
     end
 
     def _fit x
-      covariance_matrix = (x.transpose * x) / x.size1
-      u, v, s = covariance_matrix.SV_decomp
+      covariance_matrix = (x.transpose.dot x) / x.rows
+      covariance_matrix = x.cov
+      u, s, vt = covariance_matrix.gesvd
       
-      ev = s**2 / x.size1
-      evr = ev / ev.sum
+      ev = s.transpose**2 / x.rows
+      evr = ev / ev.sum(1)[0]
 
       @explained_variance = slice_n ev
       @explained_variance_ratio = slice_n evr
@@ -65,51 +69,45 @@ class PCA
     end
 
     def _transform x
-      x * @components.transpose
+      x.dot @components.transpose
     end
 
     def ensure_matrix x
       case x
-      when GSL::Matrix
+      when NMatrix
         x
-      when Array
-        GSL::Matrix[*x]
       else
-        x.to_gm
+        x.to_nm(nil, :float64)
       end
     end
 
     def calculate_mean x
-      x.size2.times.map {|col| x.col(col).mean }
+      x.cols.times.map {|col| x.col(col).mean[0] }
     end
 
     def mean_normalize x
-      x.size2.times {|col| x.col(col).sub! @mean[col] }
+      x.cols.times {|col| x[0..-1,col] -= @mean[col] }
     end
 
     def undo_mean_normalize x
-      x.size2.times {|col| x.col(col).add! @mean[col] }
+      x.cols.times {|col| x[0..-1,col] += @mean[col] }
     end
 
     def calculate_std x
-      x.size2.times.map {|col| x.col(col).sd }
+      x.cols.times.map {|col| x.col(col).std[0] }
     end
 
     def scale x
-      x.size2.times {|col| x.col(col).div! @std[col] }
+      x.cols.times {|col| x[0..-1,col] /= @std[col] }
     end
 
     def undo_scale x
-      x.size2.times {|col| x.col(col).mul! @std[col] }
+      x.cols.times {|col| x[0..-1,col] *= @std[col] }
     end
 
     def slice_n x
       return x unless @n_components
-      case x
-      when GSL::Matrix
-        x.submatrix(nil, 0, @n_components)
-      when GSL::Vector
-        x[0, @n_components]
-      end
+      return x if @n_components >= x.cols
+      x[0..-1, 0..(@n_components - 1)]
     end
 end
