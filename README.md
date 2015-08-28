@@ -1,6 +1,6 @@
 # Principal Component Analysis (PCA)
 
-[Principal component analysis](http://setosa.io/ev/principal-component-analysis/) in Ruby. Uses [GSL](http://www.gnu.org/software/gsl/) for calculations.
+[Principal component analysis](http://setosa.io/ev/principal-component-analysis/) in Ruby. Uses [NMatrix](https://github.com/SciRuby/nmatrix) for calculations.
 
 PCA can be used to map data to a lower dimensional space while minimizing information loss. 
 It's useful for data visualization, where you're limited to 2-D and 3-D plots.

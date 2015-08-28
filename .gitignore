@@ -1,3 +1,4 @@
 examples/out/
 examples/data/faces/
 *.gem
+examples/.ipynb_checkpoints/

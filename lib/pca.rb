@@ -75,7 +75,7 @@ class PCA
     def ensure_matrix x
       case x
       when NMatrix
-        x
+        x.cast dtype: :float64
       else
         x.to_nm(nil, :float64)
       end
