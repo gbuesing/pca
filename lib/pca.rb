@@ -108,6 +108,6 @@ class PCA
     def slice_n x
       return x unless @n_components
       return x if @n_components >= x.cols
-      x[0..-1, 0..(@n_components - 1)]
+      x.slice 0..-1, 0..(@n_components - 1)
     end
 end
