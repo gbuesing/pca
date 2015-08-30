@@ -24,6 +24,8 @@ GEM
       nmatrix (= 0.2.0)
     nmatrix-lapacke (0.2.0)
       nmatrix (= 0.2.0)
+    nmatrix-rowcol (0.1.0)
+      nmatrix
     nyaplot (0.1.6)
     packable (1.3.6)
       backports
@@ -47,6 +49,7 @@ DEPENDENCIES
   nmatrix
   nmatrix-atlas
   nmatrix-lapacke
+  nmatrix-rowcol
   nyaplot
   pnm
   pry
